@@ -36,12 +36,12 @@ In order to run this sample you will have to setup a local PostgreSQL database:
 + **user:** postgres
 + **password:** postgres
 
-The required tables will be created automatically upon running the sample.
-
 You can run the database inside docker:
 ```
 docker run -d --name books-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres -p 5432:5432 postgres:latest
 ```
+
+The required tables will be created automatically upon running the sample.
 
 ## Usage
 
@@ -66,8 +66,6 @@ The example uses maven to build and run the microservice.
     ```bash
     java -cp target/classes:target/dependency/* com.kumuluz.ee.EeApplication
     ```
-   
-Database tables will be created during the tutorial.
 
 The application/service can be accessed on the following URLs:
 + Book endpoints - [http://localhost:8080/v1/books](http://localhost:8080/v1/books)
