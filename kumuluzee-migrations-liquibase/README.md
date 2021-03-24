@@ -67,7 +67,7 @@ The example uses maven to build and run the microservice.
     java -cp target/classes:target/dependency/* com.kumuluz.ee.EeApplication
     ```
    
-Database tables will be during tutorial.
+Database tables will be created during the tutorial.
 
 The application/service can be accessed on the following URLs:
 + Book endpoints - [http://localhost:8080/v1/books](http://localhost:8080/v1/books)
@@ -235,6 +235,15 @@ startup, Liquibase contexts and Liquibase labels.
 Add the following configuration:
 ```yaml
 kumuluzee:
+  # Data source configurations
+  datasources:
+    - jndi-name: jdbc/BooksDS
+      connection-url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: postgres
+      pool:
+        max-size: 20
+  # Liquibase configurations
   migrations:
     enabled: true
     liquibase:
