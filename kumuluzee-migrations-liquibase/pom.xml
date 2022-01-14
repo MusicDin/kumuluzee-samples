@@ -53,6 +53,10 @@
             <artifactId>kumuluzee-jpa-eclipselink</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.kumuluz.ee.logs</groupId>
+            <artifactId>kumuluzee-logs-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.kumuluz.ee.migrations</groupId>
             <artifactId>kumuluzee-migrations-liquibase</artifactId>
             <version>${kumuluzee-migrations.version}</version>

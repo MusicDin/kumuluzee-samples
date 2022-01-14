@@ -282,7 +282,7 @@ public class LiquibaseService {
             liquibase.validate();
 
         } catch (Exception e) {
-            LOG.info("Error while resetting database: " + e.getMessage());
+            LOG.error("Error while resetting database.", e);
         }
     }
 
@@ -293,7 +293,7 @@ public class LiquibaseService {
         try {
             liquibase.update("populate");
         } catch (Exception e) {
-            LOG.info("Error while populating database: " + e.getMessage());
+            LOG.error("Error while populating database.", e);
         }
     }
 }
@@ -308,14 +308,14 @@ public class LiquibaseResource {
     @Inject
     private LiquibaseService liquibaseService;
 
-    @GET
+    @POST
     @Path("reset")
     public Response reset() {
         liquibaseService.reset();
         return Response.noContent().build();
     }
 
-    @GET
+    @POST
     @Path("populate")
     public Response populate1() {
         liquibaseService.populate();

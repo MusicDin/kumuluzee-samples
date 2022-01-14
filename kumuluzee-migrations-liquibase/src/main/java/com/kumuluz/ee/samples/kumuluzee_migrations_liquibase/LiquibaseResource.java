@@ -22,7 +22,7 @@ package com.kumuluz.ee.samples.kumuluzee_migrations_liquibase;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -37,14 +37,14 @@ public class LiquibaseResource {
     @Inject
     private LiquibaseService liquibaseService;
 
-    @GET
+    @POST
     @Path("reset")
     public Response reset() {
         liquibaseService.reset();
         return Response.noContent().build();
     }
 
-    @GET
+    @POST
     @Path("populate")
     public Response populate1() {
         liquibaseService.populate();

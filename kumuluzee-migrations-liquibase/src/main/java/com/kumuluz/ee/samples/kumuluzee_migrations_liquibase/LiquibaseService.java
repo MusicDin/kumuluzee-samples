@@ -28,7 +28,8 @@ import liquibase.Liquibase;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.util.logging.Logger;
+import com.kumuluz.ee.logs.LogManager;
+import com.kumuluz.ee.logs.Logger;
 
 /**
  * @author Din Music
@@ -37,7 +38,7 @@ import java.util.logging.Logger;
 @RequestScoped
 public class LiquibaseService {
 
-    private static final Logger LOG = Logger.getLogger(LiquibaseService.class.getName());
+    private static final Logger LOG = LogManager.getLogger(LiquibaseService.class.getName());
 
     @Inject
     @LiquibaseChangelog(jndiName = "jdbc/BooksDS")
@@ -57,7 +58,7 @@ public class LiquibaseService {
             liquibase.validate();
 
         } catch (Exception e) {
-            LOG.info("Error while resetting database: " + e.getMessage());
+            LOG.error("Error while resetting database.", e);
         }
     }
 
@@ -68,7 +69,7 @@ public class LiquibaseService {
         try {
             liquibase.update("populate");
         } catch (Exception e) {
-            LOG.info("Error while populating database: " + e.getMessage());
+            LOG.error("Error while populating database.", e);
         }
     }
 }
