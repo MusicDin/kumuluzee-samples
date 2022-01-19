@@ -327,3 +327,42 @@ public class LiquibaseResource {
 ### Build the microservice and run it
 
 To build the microservice and run the sample, use the commands described in the previous sections.
+
+After you run the microservice, it should be accessible by default at the URL
+[http://localhost:8080/v1](http://localhost:8080/v1).
+You can demonstrate the use of the Liquibase extension by following the steps below:
+
+1. Querying the [/books](http://localhost:8080/v1/books) endpoint should result in an empty array,
+   since our database is empty.
+2. Call the endpoint [/migrations/populate](http://localhost:8080/v1/migrations/populate) using the method POST
+   to trigger a migration that populates a database with some sample books.
+3. If you query the [/books](http://localhost:8080/v1/books) endpoint again, you should get a response similar to the
+   one below, showing us that the migration was successful.
+```
+[
+    {
+        "id": "2465c7c0-4e43-4dd9-8257-0542d4661b94",
+        "title": "KumuluzEE in action",
+        "author": "KumuluzEE"
+    },
+    {
+        "id": "452aa339-6481-49d4-9024-5796fa6ac633",
+        "title": "KumuluzEE migrations",
+        "author": "KumuluzEE"
+    },
+    {
+        "id": "9c3bb6ce-3906-4a37-b807-229e6687346d",
+        "title": "KumuluzEE tips and tricks",
+        "author": "KumuluzEE"
+    },
+    {
+        "id": "f7c5deb1-1602-41a5-b75d-d23d80f547fc",
+        "title": "KumuluzEE best practices",
+        "author": "KumuluzEE"
+    }
+]
+```
+4. To clear the entries from the database, call the [/migrations/reset](http://localhost:8080/v1/migrations/reset) endpoint with a method POST.
+   This will also trigger a migration, but this time it will clear the database instead of populating it.
+5. If you query the [/books](http://localhost:8080/v1/books) endpoint for the last time, you can see if the migration
+   was successful. The expected result is an empty array.

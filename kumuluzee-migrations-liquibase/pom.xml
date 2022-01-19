@@ -16,6 +16,7 @@
 
     <properties>
         <kumuluzee-migrations.version>1.0.0-SNAPSHOT</kumuluzee-migrations.version>
+        <kumuluzee-logs-jul.version>1.4.6</kumuluzee-logs-jul.version>
         <postgresql.version>42.2.19</postgresql.version>
     </properties>
 
@@ -54,7 +55,8 @@
         </dependency>
         <dependency>
             <groupId>com.kumuluz.ee.logs</groupId>
-            <artifactId>kumuluzee-logs-common</artifactId>
+            <artifactId>kumuluzee-logs-jul</artifactId>
+            <version>${kumuluzee-logs-jul.version}</version>
         </dependency>
         <dependency>
             <groupId>com.kumuluz.ee.migrations</groupId>
