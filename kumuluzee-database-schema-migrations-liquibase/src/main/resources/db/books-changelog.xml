@@ -19,7 +19,7 @@
         </insert>
         <insert tableName="book">
             <column name="id">452aa339-6481-49d4-9024-5796fa6ac633</column>
-            <column name="title">KumuluzEE migrations</column>
+            <column name="title">KumuluzEE database schema migrations</column>
             <column name="author">KumuluzEE</column>
         </insert>
         <insert tableName="book">

@@ -9,13 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kumuluzee-migrations-liquibase</artifactId>
+    <artifactId>kumuluzee-database-schema-migrations-liquibase</artifactId>
 
-    <name>KumuluzEE Liquibase migrations sample</name>
-    <description>Liquibase migrations usage with KumuluzEE</description>
+    <name>KumuluzEE Liquibase database schema migrations sample</name>
+    <description>Liquibase database schema migrations usage with KumuluzEE</description>
 
     <properties>
-        <kumuluzee-migrations.version>1.0.0-SNAPSHOT</kumuluzee-migrations.version>
+        <kumuluzee-database-schema-migrations.version>1.0.0-SNAPSHOT</kumuluzee-database-schema-migrations.version>
         <kumuluzee-logs-jul.version>1.4.6</kumuluzee-logs-jul.version>
         <postgresql.version>42.2.19</postgresql.version>
     </properties>
@@ -59,9 +59,9 @@
             <version>${kumuluzee-logs-jul.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.kumuluz.ee.migrations</groupId>
-            <artifactId>kumuluzee-migrations-liquibase</artifactId>
-            <version>${kumuluzee-migrations.version}</version>
+            <groupId>com.kumuluz.ee.database-schema-migrations</groupId>
+            <artifactId>kumuluzee-database-schema-migrations-liquibase</artifactId>
+            <version>${kumuluzee-database-schema-migrations.version}</version>
         </dependency>
 
         <dependency>

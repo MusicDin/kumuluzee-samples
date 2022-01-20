@@ -18,7 +18,7 @@
  *  software. See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.kumuluz.ee.samples.kumuluzee_migrations_liquibase;
+package com.kumuluz.ee.samples.kumuluzee_database_schema_migrations_liquibase;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

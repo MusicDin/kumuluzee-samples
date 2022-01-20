@@ -1,10 +1,10 @@
 # KumuluzEE migrations with Liquibase
 
-> Create a simple REST service that uses Liquibase for database migrations.
+> Create a simple REST service that uses Liquibase for database schema migrations.
 
-The goal of this sample is to demonstrate the use of KumuluzEE Migrations with Liquibase. 
-The tutorial will walk you through developing migrations at application startup and show you how to perform 
-migrations while the application is already running. 
+The goal of this sample is to demonstrate the use of KumuluzEE Database Schema Migrations with Liquibase. 
+The tutorial will walk you through developing database schema migrations at application startup and show you 
+how to perform database schema migrations while the application is already running. 
 Required knowledge: basic familiarity with JPA, CDI and basic concepts of REST and JSON.
 
 ## Requirements
@@ -98,7 +98,7 @@ We need the following dependencies in our microservice:
 + `kumuluzee-jax-rs-jersey`
 + `kumuluzee-cdi-weld`
 + `kumuluzee-jpa-eclipselink`
-+ `kumuluzee-migrations-liquibase`
++ `kumuluzee-database-schema-migrations-liquibase`
 + `postgresql`
 
 Add the following Maven dependencies to the `pom.xml`:
@@ -124,9 +124,9 @@ Add the following Maven dependencies to the `pom.xml`:
    <artifactId>kumuluzee-jpa-eclipselink</artifactId>
 </dependency>
 <dependency>
-   <groupId>com.kumuluz.ee.migrations</groupId>
-   <artifactId>kumuluzee-migrations-liquibase</artifactId>
-   <version>${kumuluzee-migrations.version}</version>
+   <groupId>com.kumuluz.ee.database-schema-migrations</groupId>
+   <artifactId>kumuluzee-database-schema-migrations-liquibase</artifactId>
+   <version>${kumuluzee-database-schema-migrations.version}</version>
 </dependency>
 
 <!-- Only if using PostgreSQL-->
@@ -208,7 +208,7 @@ The changelog file will be named `books-changelog.xml` and will be placed into `
         </insert>
         <insert tableName="book">
             <column name="id">452aa339-6481-49d4-9024-5796fa6ac633</column>
-            <column name="title">KumuluzEE migrations</column>
+            <column name="title">KumuluzEE database schema migrations</column>
             <column name="author">KumuluzEE</column>
         </insert>
         <insert tableName="book">
@@ -236,7 +236,7 @@ the actions to be performed at startup, the Liquibase contexts and the Liquibase
 Add the following configuration:
 ```yaml
 kumuluzee:
-  migrations:
+  database-schema-migrations:
     enabled: true
     liquibase:
       changelogs:
@@ -250,9 +250,9 @@ kumuluzee:
 
 ### Implement REST service
 
-To trigger Liquibase migrations at runtime, we need to inject the `LiquibaseContainer` object. The LiquibaseContainer 
-contains the corresponding Liquibase object, which is created based on the `jndiName` specified in the `@LiquibaseChangelog` 
-annotation.
+To trigger Liquibase database schema migrations at runtime, we need to inject the `LiquibaseContainer` object.
+The LiquibaseContainer contains the corresponding Liquibase object, which is created based on the `jndiName` specified 
+in the `@LiquibaseChangelog` annotation.
 
 *Note: If only one Liquibase configuration is specified in the KumuluzEE configuration file, 
 the `jndiName` parameter or the entire `@LiquibaseChangelog` annotation can be omitted.* 
@@ -334,8 +334,8 @@ You can demonstrate the use of the Liquibase extension by following the steps be
 
 1. Querying the [/books](http://localhost:8080/v1/books) endpoint should result in an empty array,
    since our database is empty.
-2. Call the endpoint [/migrations/populate](http://localhost:8080/v1/migrations/populate) using the method POST
-   to trigger a migration that populates a database with some sample books.
+2. Call the endpoint `http://localhost:8080/v1/migrations/populate` using the method `POST`
+   to trigger a database schema migration that populates a database with some sample books.
 3. If you query the [/books](http://localhost:8080/v1/books) endpoint again, you should get a response similar to the
    one below, showing us that the migration was successful.
 ```
@@ -347,7 +347,7 @@ You can demonstrate the use of the Liquibase extension by following the steps be
     },
     {
         "id": "452aa339-6481-49d4-9024-5796fa6ac633",
-        "title": "KumuluzEE migrations",
+        "title": "KumuluzEE database schema migrations",
         "author": "KumuluzEE"
     },
     {
@@ -362,7 +362,8 @@ You can demonstrate the use of the Liquibase extension by following the steps be
     }
 ]
 ```
-4. To clear the entries from the database, call the [/migrations/reset](http://localhost:8080/v1/migrations/reset) endpoint with a method POST.
-   This will also trigger a migration, but this time it will clear the database instead of populating it.
+4. To clear the entries from the database, call the `http://localhost:8080/v1/migrations/reset` endpoint with 
+   a method `POST`. This will also trigger a database schema migration, but this time it will clear the database instead 
+   of populating it.
 5. If you query the [/books](http://localhost:8080/v1/books) endpoint for the last time, you can see if the migration
    was successful. The expected result is an empty array.

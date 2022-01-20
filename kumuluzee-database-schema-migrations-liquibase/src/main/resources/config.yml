@@ -7,7 +7,7 @@ kumuluzee:
       password: postgres
       pool:
         max-size: 20
-  migrations:
+  database-schema-migrations:
     enabled: true
     liquibase:
       changelogs:

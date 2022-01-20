@@ -8,7 +8,7 @@
 
         <non-jta-data-source>jdbc/BooksDS</non-jta-data-source>
 
-        <class>com.kumuluz.ee.samples.kumuluzee_migrations_liquibase.Book</class>
+        <class>com.kumuluz.ee.samples.kumuluzee_database_schema_migrations_liquibase.Book</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>

@@ -18,36 +18,54 @@
  *  software. See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.kumuluz.ee.samples.kumuluzee_migrations_liquibase;
+package com.kumuluz.ee.samples.kumuluzee_database_schema_migrations_liquibase;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * @author Din Music
  * @since 3.13.0
  */
-@Path("migrations")
+@Path("books")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
-public class LiquibaseResource {
+public class BookResource {
 
     @Inject
-    private LiquibaseService liquibaseService;
+    private BookService bookService;
 
-    @POST
-    @Path("reset")
-    public Response reset() {
-        liquibaseService.reset();
-        return Response.noContent().build();
+    @GET
+    @Path("{bookId}")
+    public Response getBook(@PathParam("bookId") String bookId) {
+        Book book = bookService.getBook(bookId);
+        return (book != null)
+                ? Response.ok(book).build()
+                : Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @GET
+    public Response getBooks() {
+        List<Book> books = bookService.getBooks();
+        return Response.ok(books).build();
     }
 
     @POST
-    @Path("populate")
-    public Response populate1() {
-        liquibaseService.populate();
+    public Response addBook(Book book) {
+        Book addedBook = bookService.addBook(book);
+        return Response.ok(addedBook).build();
+    }
+
+    @DELETE
+    @Path("{bookId}")
+    public Response deleteBook(@PathParam("bookId") String bookId) {
+        bookService.deleteBook(bookId);
         return Response.noContent().build();
     }
+
 }

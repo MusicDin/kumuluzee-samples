@@ -18,10 +18,10 @@
  *  software. See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.kumuluz.ee.samples.kumuluzee_migrations_liquibase;
+package com.kumuluz.ee.samples.kumuluzee_database_schema_migrations_liquibase;
 
-import com.kumuluz.ee.migrations.liquibase.LiquibaseContainer;
-import com.kumuluz.ee.migrations.liquibase.annotations.LiquibaseChangelog;
+import com.kumuluz.ee.database.schema.migrations.liquibase.LiquibaseContainer;
+import com.kumuluz.ee.database.schema.migrations.liquibase.annotations.LiquibaseChangelog;
 import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;

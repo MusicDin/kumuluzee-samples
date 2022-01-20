@@ -18,58 +18,36 @@
  *  software. See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.kumuluz.ee.samples.kumuluzee_migrations_liquibase;
+package com.kumuluz.ee.samples.kumuluzee_database_schema_migrations_liquibase;
 
-import org.eclipse.persistence.annotations.UuidGenerator;
-
-import javax.persistence.*;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 /**
  * @author Din Music
  * @since 3.13.0
  */
-@Entity
-@Table
-@NamedQuery(
-        name = Book.FIND_ALL,
-        query = "SELECT b FROM Book b"
-)
-public class Book {
+@Path("migrations")
+@RequestScoped
+public class LiquibaseResource {
 
-    public static final String FIND_ALL = "Book.findAll";
+    @Inject
+    private LiquibaseService liquibaseService;
 
-    @Id
-    @GeneratedValue(generator = "uuid-generator")
-    @UuidGenerator(name = "uuid-generator")
-    private String id;
-
-    @Column
-    private String title;
-
-    @Column
-    private String author;
-
-    public String getId() {
-        return id;
+    @POST
+    @Path("reset")
+    public Response reset() {
+        liquibaseService.reset();
+        return Response.noContent().build();
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    @POST
+    @Path("populate")
+    public Response populate1() {
+        liquibaseService.populate();
+        return Response.noContent().build();
     }
 }
